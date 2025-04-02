@@ -37,34 +37,6 @@ else:
 # Sort teams
 teams = sorted(df['HomeTeam'].unique().tolist())
 
-# Get actual league table
-def get_league_table():
-    url = "https://www.bbc.co.uk/sport/football/premier-league/table"
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        league_table = {}
-        for row in soup.select('table tr')[1:]:
-            cols = row.find_all('td')
-            if len(cols) >= 8:
-                position = int(cols[0].text.strip())
-                team_name = cols[1].text.strip()
-                played = int(cols[2].text.strip())
-                points = int(cols[9].text.strip())
-                goals_diff = int(cols[8].text.strip().replace('+', '').replace('−', '-'))
-                league_table[team_name] = {
-                    'position': position,
-                    'points': points,
-                    'goals_diff': goals_diff,
-                    'played': played
-                }
-        print("League table downloaded properly.")
-        return league_table
-    print("Error while downloading league table.")
-    return {}
-
-league_table = get_league_table()
-
 def calculate_team_strength(team_name, df, is_home=True, last_matches=5):
     home_weight = 1.2 
     away_weight = 0.9
@@ -91,17 +63,6 @@ def calculate_team_strength(team_name, df, is_home=True, last_matches=5):
     # Estimate shots on target
     chances = matches['HST' if is_home else 'AST'].mean() * weight
     
-    # Respecting standings in the table
-    team_stats = league_table.get(team_name, {})
-    position_weight = 1 / (team_stats.get('position', 20) + 1)
-    points_weight = team_stats.get('points', 0) / 100
-    goals_diff_weight = team_stats.get('goals_diff', 0) / 100 
-    
-    # Making latest games more valuable
-    goals_scored *= (1 + position_weight + points_weight + goals_diff_weight)
-    goals_conceded *= (1 - position_weight - points_weight - goals_diff_weight)
-    possession *= (1 + position_weight + points_weight)
-    chances *= (1 + position_weight + points_weight)
     
     return {
         'goals_scored': goals_scored,
@@ -181,7 +142,7 @@ def predict():
         home_team = home_team_var.get()
         away_team = away_team_var.get()
         result = simulate_match(home_team, away_team, df)
-        result_label.config(text=f"Score: {result[0]}-{result[1]}\nPossession: {result[2]:.1f}% - {result[3]:.1f}%\nShots on target: {result[4]} - {result[5]}")
+        result_label.config(text=f"{home_team} vs {away_team}\nScore: {result[0]}-{result[1]}\nPossession: {result[2]:.1f}% - {result[3]:.1f}%\nShots on target: {result[4]} - {result[5]}")
     except Exception as e:
         result_label.config(text=f"Error: {str(e)}")
 
