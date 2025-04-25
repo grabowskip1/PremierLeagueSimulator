@@ -34,7 +34,7 @@ Possession percentage for each team.
 Number of shots on target for both teams.
 
 # User Interface:
-The application provides a simple graphical interface where you can select two teams, click "Simulate", and view the predicted results (score, possession, and shots on target).
+The application provides a simple graphical interface where you can select two teams, click "Simulate"(it takes a second to make all of the sims, so if you don't see the predictions exactly after pressing "simulate" -> wait a moment), and view the predicted results (score, possession, and shots on target).
 
 # Usage
 Run the script by executing:
