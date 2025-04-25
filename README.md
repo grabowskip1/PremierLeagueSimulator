@@ -1,4 +1,4 @@
-# ⚽ Football Match Predictor Pro
+# ⚽ Premier League Games Simulator
 This is a simple football match simulator using historical data provided by Football-Data API. The simulator estimates match results based on the historical performance of the teams involved in the match.
 
 # Features
