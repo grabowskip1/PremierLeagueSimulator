@@ -5,7 +5,6 @@ import requests
 import numpy as np
 from tkinter import ttk
 from datetime import datetime
-from bs4 import BeautifulSoup
 
 # Collecting data
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -90,11 +89,25 @@ def simulate_match(home_team, away_team, df, simulations=5000):
         # Simulate possession
         home_possession = home_strength['possession']
         away_possession = away_strength['possession']
-        
-        # Normalization of possession
+
+        # Normalization of possession so that the sum is 100% and no team is biased
         total_possession = home_possession + away_possession
-        home_possession = home_possession / total_possession
-        away_possession = away_possession / total_possession
+
+        if total_possession == 0:
+            home_possession = 0.5
+            away_possession = 0.5
+        else:
+            # Calculate normalized possession based on total possession
+            home_possession = (home_possession / total_possession) * 0.5 + 0.5
+            away_possession = (away_possession / total_possession) * 0.5 + 0.5
+
+            # Ensure the sum is 100% by adjusting proportionally
+            if home_possession + away_possession != 1:
+                correction = 1 - (home_possession + away_possession)
+                home_possession += correction / 2
+                away_possession += correction / 2
+
+
 
         # Simulate shots on target
         home_chances = home_strength['chances'] + np.random.normal(0, 0.1)
