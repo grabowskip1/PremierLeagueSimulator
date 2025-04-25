@@ -28,10 +28,10 @@ Possession estimation based on shots attempted.
 Shots on target.
 
 # Match Simulation:
-The simulator runs 5000 simulations for a match between two teams and returns:
-The predicted score for both teams.
+The simulator runs 5000 simulations for a match between two teams and returns average:
+Predicted score for both teams.
 Possession percentage for each team.
-The number of shots on target for both teams.
+Number of shots on target for both teams.
 
 # User Interface:
 The application provides a simple graphical interface where you can select two teams, click "Simulate", and view the predicted results (score, possession, and shots on target).
