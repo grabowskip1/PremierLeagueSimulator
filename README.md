@@ -13,10 +13,9 @@ requests (for fetching the historical football data)
 pandas (for handling the data)
 numpy (for statistical calculations)
 tkinter (for creating the graphical user interface)
-beautifulsoup4 (for web scraping if necessary)
 
 # Install them using pip:
-pip install requests pandas numpy tk beautifulsoup4
+pip install requests pandas numpy tk
 
 # How It Works
 Data Collection:
