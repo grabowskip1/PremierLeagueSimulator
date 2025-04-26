@@ -75,7 +75,8 @@ Possession: 53.2% - 46.8%
 
 Shots on target: 4 - 3
 
-# A few matches I tried it on (The simulations were made before the actual match)
+# A few matches I tried it on
+The simulations were made before the actual match.
 | Date       | Home Team     | Away Team    | Predicted Score | Predicted Possession | Predicted Shots on Target | Actual Score | Actual Possession | Actual Shots on Target |
 |------------|---------------|--------------|-----------------|----------------------|---------------------------|--------------|--------------------|------------------------|
 | 25.02.2025 | Brighton      | Bournemouth  | 2-1             | 54.2%-45.8%          | 5-7                       | 2-1          | 44%-56%            | 4-5                    |
